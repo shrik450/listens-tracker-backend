@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnNullInAppearances < ActiveRecord::Migration[5.1]
   def change
     change_column_null :appearances, :episode_id, false

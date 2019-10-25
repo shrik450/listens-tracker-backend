@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: episodes
@@ -17,7 +19,7 @@
 #  index_episodes_on_feed_id_and_number  (feed_id,number)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class EpisodeTest < ActiveSupport::TestCase
   # test "the truth" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: appearances
@@ -10,7 +12,7 @@
 #  host_id       :integer          not null
 #
 
-require 'test_helper'
+require "test_helper"
 
 class AppearanceTest < ActiveSupport::TestCase
   # test "the truth" do

@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  get 'episodes/index'
+  get "episodes/index"
 
-  get 'episodes/show'
+  get "episodes/show"
 
-  get 'episodes/create'
+  get "episodes/create"
 
-  get 'episodes/update'
+  get "episodes/update"
 
-  get 'episodes/destroy'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "episodes/destroy"
 end

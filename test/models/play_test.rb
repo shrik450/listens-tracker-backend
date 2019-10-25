@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: plays
@@ -10,7 +12,7 @@
 #  episode_id :integer          not null
 #
 
-require 'test_helper'
+require "test_helper"
 
 class PlayTest < ActiveSupport::TestCase
   # test "the truth" do

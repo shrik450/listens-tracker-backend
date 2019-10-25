@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AppearanceSerializer
   include FastJsonapi::ObjectSerializer
   attributes :id, :speaking_time

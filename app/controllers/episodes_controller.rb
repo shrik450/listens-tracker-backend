@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class EpisodesController < ApplicationController
   before_action :set_episode, only: %i[show update destroy]
 
   def index
     _search_params = params[:q].presence
     episodes = Episode.all
-    render json: EpisodeSerialize.new(episodes), status: :ok
+    render json: EpisodeSerializer.new(episodes), status: :ok
   end
 
   def show

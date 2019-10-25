@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: hosts
@@ -8,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-require 'test_helper'
+require "test_helper"
 
 class HostTest < ActiveSupport::TestCase
   # test "the truth" do
