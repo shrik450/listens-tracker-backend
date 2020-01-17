@@ -14,4 +14,8 @@ class Feed < ApplicationRecord
   has_many :episodes, inverse_of: :feed, dependent: :destroy
 
   validates :name, presence: true
+
+  def sync_feed
+    SyncFeedsJob.perform_later(feed_id: id) if feed_url.present?
+  end
 end

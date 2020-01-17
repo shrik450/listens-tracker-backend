@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FeedsController < ApplicationController
-  before_action :set_feed, only: %i[show update destroy]
+  before_action :set_feed, only: %i[show update destroy sync]
 
   def index
     _search_params = params[:q].presence
@@ -37,6 +37,11 @@ class FeedsController < ApplicationController
     else
       render json: {notice: "Failed"}, status: :unprocessable_entity
     end
+  end
+
+  def sync
+    SyncFeedsJob.perform_later(feed_id: @feed.id)
+    render json: {}, status: :ok
   end
 
   private

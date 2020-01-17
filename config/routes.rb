@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "episodes/index"
+  resources :feeds do
+    resources :episodes, only: %i[index create]
 
-  get "episodes/show"
+    get :sync, on: :member
+  end
 
-  get "episodes/create"
-
-  get "episodes/update"
-
-  get "episodes/destroy"
+  resources :episodes
 end

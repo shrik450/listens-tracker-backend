@@ -4,8 +4,10 @@ class AppearancesController < ApplicationController
   before_action :set_appearance, only: %i[show update destroy]
 
   def index
-    _search_params = params[:q].presence
-    appearances = Appearance.all
+    search_params = params[:q].presence
+    searched_appearances = Appearance.ransack(search_params[:q])
+    searched_appearances.sorts = "created_at desc"
+    apperances = searched_appearances.result
     render json: AppearanceSerializer.new(appearances), status: :ok
   end
 
@@ -47,5 +49,9 @@ class AppearancesController < ApplicationController
 
   def appearance_params
     params.permit(:speaking_time, :host_id, :episode_id)
+  end
+
+  def search_params
+    params.permit(q: %i[episode_id_eq host_id_eq])
   end
 end

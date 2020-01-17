@@ -28,4 +28,14 @@ class Episode < ApplicationRecord
 
   validates :number, :name, :air_date, presence: true
   validates :number, uniqueness: {scope: :feed, message: "A feed cannot have two episodes with the same number."}
+
+  scope :for_feed, ->(feed) { where(feed_id: feed) }
+
+  def last_played_at
+    plays.order(:played_at).last&.played_at
+  end
+
+  def number_of_times_played
+    plays.count
+  end
 end

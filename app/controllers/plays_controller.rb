@@ -4,8 +4,10 @@ class PlaysController < ApplicationController
   before_action :set_play, only: %i[show update destroy]
 
   def index
-    _search_params = params[:q].presence
-    plays = Play.all
+    search_params = params[:q].presence
+    searched_plays = Play.ransack(search_params[:q])
+    searched_plays.sorts = "played_at desc"
+    plays = searched_plays.result
     render json: PlaySerializer.new(plays), status: :ok
   end
 
@@ -47,5 +49,9 @@ class PlaysController < ApplicationController
 
   def play_params
     params.permit(:played_at, :play_time, :episode_id)
+  end
+
+  def search_params
+    params.permit(q: %i[episode_id_eq])
   end
 end

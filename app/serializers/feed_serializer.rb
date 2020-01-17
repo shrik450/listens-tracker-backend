@@ -2,6 +2,5 @@
 
 class FeedSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name
-  has_many :episodes
+  attributes :id, :name, :feed_url
 end

@@ -16,4 +16,13 @@ class Play < ApplicationRecord
   belongs_to :episode, inverse_of: :plays
 
   validates :played_at, :play_time, :episode, presence: true
+  validate :play_time_less_than_duration
+
+  private
+
+  def play_time_less_than_duration
+    return if episode.duration.zero?
+
+    errors.add("play_time", "greater than duration of episode") if play_time > episode.duration
+  end
 end
