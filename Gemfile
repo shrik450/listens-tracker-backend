@@ -40,6 +40,8 @@ gem "whenever"
 gem "rack-cors"
 gem "kaminari"
 gem "ransack"
+gem "sorbet-runtime"
+gem "sorbet-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +50,7 @@ group :development, :test do
   gem "annotate"
   gem "capybara", "~> 2.13"
   gem "selenium-webdriver"
+  gem "sorbet"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
 end

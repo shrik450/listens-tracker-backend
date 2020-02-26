@@ -1,3 +1,4 @@
+# typed: false
 class SyncFeedsJob < ApplicationJob
   queue_as :default
 
@@ -19,14 +20,21 @@ class SyncFeedsJob < ApplicationJob
           (itunes_duration&.minute&.minutes || 0) +
           (itunes_duration&.second&.seconds || 0)
         episode_url = item.enclosure&.url || item.url
-        if Episode.find_by(feed: feed, number: episode_number)
-          break
-        else
+        ep = Episode.find_by(feed: feed, number: episode_number)
+
+        if ep
+          break if ep.name == episode_title
+
           feed.episodes.create(
-            number: episode_number, name: episode_title, air_date: episode_date, show_notes: episode_show_notes,
+            number: episode_number + "(2)", name: episode_title, air_date: episode_date, show_notes: episode_show_notes,
             duration: episode_duration, url: episode_url
           )
         end
+
+        feed.episodes.create(
+          number: episode_number, name: episode_title, air_date: episode_date, show_notes: episode_show_notes,
+          duration: episode_duration, url: episode_url
+        )
       end
     end
   end

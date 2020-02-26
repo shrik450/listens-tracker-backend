@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 class IndexEpisodesOnNumberAndFeedId < ActiveRecord::Migration[5.1]

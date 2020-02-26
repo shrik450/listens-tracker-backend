@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -15,6 +16,8 @@
 class Appearance < ApplicationRecord
   belongs_to :host, inverse_of: :appearances
   belongs_to :episode, inverse_of: :appearances
+
+  delegate :name, to: :host
 
   validates :host, presence: true
   validates :episode, presence: true

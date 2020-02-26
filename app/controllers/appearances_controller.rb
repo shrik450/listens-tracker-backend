@@ -1,13 +1,19 @@
+# typed: false
 # frozen_string_literal: true
 
 class AppearancesController < ApplicationController
   before_action :set_appearance, only: %i[show update destroy]
 
   def index
-    search_params = params[:q].presence
-    searched_appearances = Appearance.ransack(search_params[:q])
+    episode_id = params[:episode_id]
+    searched_appearances =
+      if episode_id.present?
+        Episode.find(episode_id).appearances.ransack(search_params[:q])
+      else
+        Appearance.ransack(search_params[:q])
+      end
     searched_appearances.sorts = "created_at desc"
-    apperances = searched_appearances.result
+    appearances = searched_appearances.result.includes(:host)
     render json: AppearanceSerializer.new(appearances), status: :ok
   end
 

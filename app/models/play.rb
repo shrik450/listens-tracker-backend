@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # == Schema Information
@@ -13,6 +14,8 @@
 #
 
 class Play < ApplicationRecord
+  extend T::Sig
+
   belongs_to :episode, inverse_of: :plays
 
   validates :played_at, :play_time, :episode, presence: true
@@ -21,8 +24,8 @@ class Play < ApplicationRecord
   private
 
   def play_time_less_than_duration
-    return if episode.duration.zero?
+    return if episode.duration.blank? || T.must(episode.duration).zero?
 
-    errors.add("play_time", "greater than duration of episode") if play_time > episode.duration
+    errors.add("play_time", "greater than duration of episode") if play_time > T.must(episode.duration)
   end
 end

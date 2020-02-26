@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 class CreateFeeds < ActiveRecord::Migration[5.1]

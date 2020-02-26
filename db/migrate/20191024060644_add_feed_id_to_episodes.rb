@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 class AddFeedIdToEpisodes < ActiveRecord::Migration[5.1]
